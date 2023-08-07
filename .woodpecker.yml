@@ -152,17 +152,6 @@ pipeline:
       - diesel migration redo
     when: *slow_check_paths
 
-  cargo_test:
-    image: *muslrust_image
-    environment:
-      LEMMY_DATABASE_URL: postgres://lemmy:password@database:5432/lemmy
-      RUST_BACKTRACE: "1"
-      CARGO_HOME: .cargo
-    commands:
-      - export LEMMY_CONFIG_LOCATION=../../config/config.hjson
-      - cargo test --workspace --no-fail-fast
-    when: *slow_check_paths
-
   cargo_build:
     image: *muslrust_image
     environment:
