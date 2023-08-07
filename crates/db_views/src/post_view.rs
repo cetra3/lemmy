@@ -300,18 +300,6 @@ fn queries<'a>() -> Queries<
     if options.moderator_view.unwrap_or(false) {
       query = query.filter(community_moderator::person_id.is_not_null());
     }
-    // Only hide the read posts, if the saved_only is false. Otherwise ppl with the hide_read
-    // setting wont be able to see saved posts.
-    else if !options
-      .local_user
-      .map(|l| l.local_user.show_read_posts)
-      .unwrap_or(true)
-    {
-      // Do not hide read posts when it is a user profile view
-      if !is_profile_view {
-        query = query.filter(post_read::post_id.is_null());
-      }
-    }
 
     if options.local_user.is_some() {
       // Filter out the rows with missing languages
