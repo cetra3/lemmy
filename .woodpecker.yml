@@ -42,6 +42,7 @@ pipeline:
     commands:
       - prettier -c . '!**/volumes' '!**/dist' '!target' '!**/translations'
 
+
   restore-cache:
     image: meltwater/drone-cache:v1
     pull: true
